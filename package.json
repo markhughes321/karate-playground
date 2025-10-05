@@ -1,0 +1,16 @@
+{
+  "name": "karate-playground",
+  "version": "1.0.0",
+  "description": "Browser-based Karate API testing playground",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@bjorn3/browser_wasi_shim": "^0.3.0",
+    "xterm-pty": "^0.9.4"
+  },
+  "devDependencies": {
+    "playwright": "^1.50.2"
+  }
+}
