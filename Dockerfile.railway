@@ -1,0 +1,33 @@
+# Railway-compatible Dockerfile with Node.js + Java
+FROM node:18-slim
+
+# Install Java and dependencies
+RUN apt-get update && apt-get install -y \
+    openjdk-17-jre-headless \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Download Karate JAR
+RUN curl -L -o /app/karate.jar \
+    https://github.com/karatelabs/karate/releases/download/v1.4.1/karate-1.4.1.jar
+
+# Copy package files
+COPY package*.json ./
+
+# Install Node dependencies
+RUN npm install --production
+
+# Copy application files
+COPY . .
+
+# Create workspace directory
+RUN mkdir -p /app/workspace
+
+# Expose ports
+EXPOSE 3000 3001
+
+# Start the server
+CMD ["npm", "start"]
